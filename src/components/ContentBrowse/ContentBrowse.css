@@ -1,0 +1,6 @@
+.SearchBar{
+    display: flex;
+    flex-direction: row;
+    display: block;
+    height:  50px;
+}

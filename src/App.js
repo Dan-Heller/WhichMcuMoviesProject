@@ -1,5 +1,6 @@
 import 'tachyons/css/tachyons.min.css'
 import Logo from './components/Logo/Logo';
+import ContentBrowse  from './components/ContentBrowse/ContentBrowse';
 import './App.css';
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
       <header className="App-header">
       <Logo />
       </header>
-      <input className='f4 pa2 w-30 right' type='text' ></input>
+      < ContentBrowse />
+      
       
     </div>
   );
