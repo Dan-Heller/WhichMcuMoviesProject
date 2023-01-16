@@ -1,16 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react';
 import CardList from '../CardList/CardList';
+import SearchBox from '../SearchBox/SearchBox';
 import './ContentBrowse.css'
 
-const ContentBrowse = (props ) => {
-  return (
-    <div className='tc   br3 pa3 ma2 dib bw2 shadow-5 '>
-        <div className='SearchBar'>
-        <input className='f4 pa2 w-30 right' type='text' ></input>
-        </div>
-        <CardList content={props.content} />
-    </div>
-  );
+
+class movie {
+  constructor(name, url) {
+    this.name = name;
+    this.url = url;
+  }
 }
+
+
+class ContentBrowse extends Component {
+  constructor() {
+    super()
+    this.state = {
+      searchfield: '',
+      titles: []
+    }
+  }
+
+  onSearchChange = (event) => {
+    this.setState({ searchfield: event.target.value })
+  }
+
+
+  componentDidMount() {
+    const movie1 = new movie("Thor 3",'https://m.media-amazon.com/images/I/71ewZLJcGVL._AC_SL1101_.jpg');
+    const movie2 = new movie("Avengers",'https://m.media-amazon.com/images/I/81lMrc8bBRL._AC_UY218_.jpg');
+    const movie3 = new movie("Thor 3",'https://m.media-amazon.com/images/I/71ewZLJcGVL._AC_SL1101_.jpg');
+    const movie4 = new movie("Thor 3",'https://m.media-amazon.com/images/I/71ewZLJcGVL._AC_SL1101_.jpg');
+    const fetchedTitles =  [movie1, movie2, movie3, movie4];
+    this.setState({titles : fetchedTitles })
+  }
+
+  render(){
+    const filteredTitles = this.state.titles.filter(title =>{
+      return title.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+    })
+    
+    return ( 
+      <div className='tc br3 pa3 ma2 dib bw2  '>
+          <div className='SearchBar'>
+          <SearchBox  searchChange={this.onSearchChange} />
+          </div>
+          <CardList titlesProp={filteredTitles} />
+      </div>
+    );
+  }
+
+}
+
 
 export default ContentBrowse;

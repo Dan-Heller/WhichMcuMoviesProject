@@ -4,12 +4,6 @@ import ContentBrowse  from './components/ContentBrowse/ContentBrowse';
 import './App.css';
 import { Component } from 'react';
 
-class movie {
-  constructor(name, url) {
-    this.name = name;
-    this.url = url;
-  }
-}
 
 class App extends Component {
 
@@ -22,18 +16,15 @@ class App extends Component {
   }
 
   render(){
-    const movie1 = new movie("Thor 3",'https://m.media-amazon.com/images/I/71ewZLJcGVL._AC_SL1101_.jpg');
-    const movie2 = new movie("Thor 3",'https://m.media-amazon.com/images/I/71ewZLJcGVL._AC_SL1101_.jpg');
-    const movie3 = new movie("Thor 3",'https://m.media-amazon.com/images/I/71ewZLJcGVL._AC_SL1101_.jpg');
-    const movie4 = new movie("Thor 3",'https://m.media-amazon.com/images/I/71ewZLJcGVL._AC_SL1101_.jpg');
-    const contentList = new  Array(movie1, movie2, movie3, movie4);
+    
 
       return (
         <div className="App">
           <header className="App-header">
-          <Logo />
+            <Logo />
+            <h1 className='shadow'>GUIDE</h1>
           </header>
-          < ContentBrowse content={contentList}/>
+          < ContentBrowse />
           
           
         </div>
