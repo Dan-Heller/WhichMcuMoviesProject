@@ -42,6 +42,17 @@ class ContentBrowse extends Component {
     this.setState({titles : fetchedTitles })
   }
 
+  handleRightArrowClick = (event) => {
+    const cardsContainer = document.getElementById("cardsContainer");
+    cardsContainer.scrollLeft += 100;
+    console.log("right right right");
+ }
+ 
+ handleLeftArrowClick = (event) => {
+    const cardsContainer = document.getElementById("cardsContainer");
+    cardsContainer.scrollLeft -= 100;
+ }
+
   render(){
     const filteredTitles = this.state.titles.filter(title =>{
       return title.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
@@ -54,13 +65,13 @@ class ContentBrowse extends Component {
           </div>
 
           <div className='titlesPresentation'>
-          <div className="left-arrow" >
+          <div className="left-arrow grow "  >
             <img src={chevronLeft} alt="Left Arrow" className='arrowImg'/>
           </div>
 
-          <CardList titlesProp={filteredTitles}  className='cardslist'/>
+          <CardList titlesProp={filteredTitles}  className='cardslist'  id="cardsContainer"/>
           
-          <div className="right-arrow" >
+          <div className="right-arrow grow " onClick={this.handleRightArrowClick}  >
             <img src={chevronRight} alt="Right Arrow" className='arrowImg' />
           </div>     
           </div>
