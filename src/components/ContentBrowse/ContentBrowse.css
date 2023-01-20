@@ -1,6 +1,34 @@
+
+
 .SearchBar{
-    display: flex;
+   
     flex-direction: row;
     display: block;
     height:  50px;
+    
+    width: 2000px;
 }
+
+.titlesPresentation{
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    
+
+}
+
+.cardslist{
+    display: inline-block;
+}
+
+.left-arrow, .right-arrow{
+   display: inline-block;
+}
+
+.arrowImg{
+    width: 50px;
+    height: 50px;
+}
+

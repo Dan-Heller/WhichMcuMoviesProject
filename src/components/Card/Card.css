@@ -6,8 +6,10 @@ h3{
 .CardSize {
     width: 250px;
     height: 320px;
+    flex-shrink: 0;
 }
 
 img{
    height : 250px; 
+  
 }

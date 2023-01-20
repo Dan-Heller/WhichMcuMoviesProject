@@ -1,5 +1,15 @@
 .style{
+    
     display: flex;
     flex-direction: row;
-    
+   
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
+
+.cards{
+    display: flex;
+    width: 1500px;
+}
+
