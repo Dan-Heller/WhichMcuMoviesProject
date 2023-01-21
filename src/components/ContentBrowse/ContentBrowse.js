@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import CardList from '../CardList/CardList';
 import SearchBox from '../SearchBox/SearchBox';
 import './ContentBrowse.css'
-import chevronLeft from './chevronLeft.png';
-import chevronRight from './chevronRight.png'
+
 
 
 
@@ -22,6 +21,7 @@ class ContentBrowse extends Component {
       searchfield: '',
       titles: []
     }
+    this.childRef = React.createRef();
   }
 
   onSearchChange = (event) => {
@@ -42,16 +42,7 @@ class ContentBrowse extends Component {
     this.setState({titles : fetchedTitles })
   }
 
-  handleRightArrowClick = (event) => {
-    const cardsContainer = document.getElementById("cardsContainer");
-    cardsContainer.scrollLeft += 100;
-    console.log("right right right");
- }
- 
- handleLeftArrowClick = (event) => {
-    const cardsContainer = document.getElementById("cardsContainer");
-    cardsContainer.scrollLeft -= 100;
- }
+
 
   render(){
     const filteredTitles = this.state.titles.filter(title =>{
@@ -65,20 +56,19 @@ class ContentBrowse extends Component {
           </div>
 
           <div className='titlesPresentation'>
-          <div className="left-arrow grow "  >
-            <img src={chevronLeft} alt="Left Arrow" className='arrowImg'/>
-          </div>
-
-          <CardList titlesProp={filteredTitles}  className='cardslist'  id="cardsContainer"/>
           
-          <div className="right-arrow grow " onClick={this.handleRightArrowClick}  >
-            <img src={chevronRight} alt="Right Arrow" className='arrowImg' />
-          </div>     
-          </div>
-  
-  
 
-      </div>
+          <div id="cardsContainer">
+          <CardList titlesProp={filteredTitles}  className='cardslist' ref={this.childRef}  />
+          </div>
+
+          </div>
+          
+         
+  
+  </div>
+
+     
     );
   }
 

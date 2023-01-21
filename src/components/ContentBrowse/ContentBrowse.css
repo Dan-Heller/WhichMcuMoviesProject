@@ -12,24 +12,19 @@
 .titlesPresentation{
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap;
-    flex-direction: row;
     align-items: center;
+   
+    
     height: 400px ;
 
 }
 
+
+
 .cardslist{
     display: inline-block;
-    
+  
 }
 
-.left-arrow, .right-arrow{
-   display: inline-block;
-}
 
-.arrowImg{
-    width: 50px;
-    height: 50px;
-}
 
