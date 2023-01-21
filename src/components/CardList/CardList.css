@@ -1,24 +1,23 @@
-.cards{
-    
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    flex-wrap: nowrap;
-    justify-content: center;
-    width: 1590px;
-}
-
-
-
-
 .style{
     display: flex;
     align-items: center;
     justify-content: center;
-   
- 
+    position: relative;
+    width: 1500px;
 }
+
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 1400px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    
+}
+
+
 
 .left-arrow, .right-arrow{
     display: inline-block;

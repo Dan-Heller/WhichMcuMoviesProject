@@ -59,7 +59,7 @@ class ContentBrowse extends Component {
           
 
           <div id="cardsContainer">
-          <CardList titlesProp={filteredTitles}  className='cardslist' ref={this.childRef}  />
+          <CardList titlesProp={filteredTitles}   ref={this.childRef}  />
           </div>
 
           </div>
