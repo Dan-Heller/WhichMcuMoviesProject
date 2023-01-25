@@ -3,6 +3,7 @@ import Logo from './components/Logo/Logo';
 import ContentBrowse  from './components/ContentBrowse/ContentBrowse';
 import './App.css';
 import { Component } from 'react';
+import WatchOrder from './components/WatchOrder/WatchOrder';
 
 
 class App extends Component {
@@ -25,7 +26,7 @@ class App extends Component {
             <h1 className='shadow'>GUIDE</h1>
           </header>
           < ContentBrowse />
-          
+          < WatchOrder/>
           
         </div>
       );

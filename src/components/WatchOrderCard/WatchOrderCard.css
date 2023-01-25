@@ -1,0 +1,33 @@
+.watchOrderCard{
+    flex-shrink: 0;
+    display: inline-flex;
+}
+
+.titleIndex{
+    color: white;
+}
+
+@keyframes blink {
+    0% {
+        border-color: transparent;
+      }
+      25% {
+        border-color: yellow;
+      }
+      50% {
+        border-color: transparent;
+      }
+      100% {
+        border-color: orange;
+      }
+  }
+
+.Border {
+    border: 2px solid ;
+    border-radius: 2%;
+    border-color: yellow;
+  }
+
+  .blink-border {
+    animation: blink 1s linear infinite;
+  }
