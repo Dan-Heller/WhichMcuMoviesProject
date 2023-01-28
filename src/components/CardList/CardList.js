@@ -5,7 +5,7 @@ import chevronLeft from './chevronLeft.png';
 import chevronRight from './chevronRight.png';
 
 
-const CardList = ({titlesProp} ) => {
+const CardList = ({titlesProp, TitleClicked} ) => {
   const cardsContainerRef = React.createRef();
   const handleRightClick = (event) => {
     cardsContainerRef.current.scrollTo({
@@ -36,6 +36,8 @@ const CardList = ({titlesProp} ) => {
             <Card
             url={titlesProp[i].poster_url}
             name={titlesProp[i].name} 
+            TitleClicked={TitleClicked}
+            Index = {titlesProp[i].ind}
             />
           );
         })
