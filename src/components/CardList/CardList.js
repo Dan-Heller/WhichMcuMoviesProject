@@ -34,7 +34,7 @@ const CardList = ({titlesProp} ) => {
         titlesProp.map((title, i) => {
           return(
             <Card
-            url={titlesProp[i].url}
+            url={titlesProp[i].poster_url}
             name={titlesProp[i].name} 
             />
           );
