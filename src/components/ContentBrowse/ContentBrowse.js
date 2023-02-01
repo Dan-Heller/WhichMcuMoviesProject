@@ -2,17 +2,7 @@ import React, { Component } from 'react';
 import CardList from '../CardList/CardList';
 import SearchBox from '../SearchBox/SearchBox';
 import './ContentBrowse.css'
-
-
-
-
-class movie {
-  constructor(name, url) {
-    this.name = name;
-    this.url = url;
-    
-  }
-}
+import Title from '../../Models/Title';
 
 
 class ContentBrowse extends Component {
@@ -35,7 +25,8 @@ class ContentBrowse extends Component {
     .then(res => res.json())
     .then(data => {
       console.log(data);
-      this.setState({ titles: data });
+      //const TitlesArray = data;
+      this.setState({ titles: TitlesArray });
     })
     .catch(err => {
       console.log(err);
