@@ -25,7 +25,7 @@ class ContentBrowse extends Component {
     .then(res => res.json())
     .then(data => {
       console.log(data);
-      //const TitlesArray = data;
+      const TitlesArray = data;
       this.setState({ titles: TitlesArray });
     })
     .catch(err => {
