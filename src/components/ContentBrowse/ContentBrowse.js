@@ -10,7 +10,8 @@ class ContentBrowse extends Component {
     super()
     this.state = {
       searchfield: '',
-      titles: []
+      titles: [],
+      
     }
     this.childRef = React.createRef();
   }
@@ -20,7 +21,7 @@ class ContentBrowse extends Component {
   }
 
 
-  componentDidMount() {
+ /* componentDidMount() {
     fetch('http://localhost:3001/AllTitles')
     .then(res => res.json())
     .then(data => {
@@ -30,9 +31,21 @@ class ContentBrowse extends Component {
     })
     .catch(err => {
       console.log(err);
-    });
-    /*this.setState({titles : fetchedTitles })*/
+    });*/
+  async componentDidMount() {
+  try {
+    const res = await fetch('http://localhost:3001/AllTitles');
+    const data = await res.json();
+    console.log(data);
+    const TitlesArray = data;
+    this.setState({ titles: TitlesArray });
+  } catch (err) {
+    console.log(err);
   }
+  }
+
+   
+  
 
 
 
@@ -43,6 +56,9 @@ class ContentBrowse extends Component {
     
     return ( 
       <div className='tc br3 pa3 ma2 dib bw2 '>
+
+          
+
           <div className='SearchBar'>
           <SearchBox  searchChange={this.onSearchChange} />
           </div>

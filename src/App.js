@@ -6,12 +6,14 @@ import { Component } from 'react';
 import WatchOrder from './components/WatchOrder/WatchOrder';
 
 
+
+
 class App extends Component {
 
   constructor() {
     super()
     this.state = {
-      chosenTitleInd: ''
+      chosenTitleInd: '',
       
     }
   }
@@ -30,7 +32,7 @@ class App extends Component {
             <Logo />
             <h1 className='shadow'>GUIDE</h1>
           </header>
-          < ContentBrowse TitleClicked={this.TitleClicked} />
+          < ContentBrowse TitleClicked={this.TitleClicked}/>
           < WatchOrder chosenTitle={this.state.chosenTitleInd} TitleClicked={this.TitleClicked} />
           
         </div>

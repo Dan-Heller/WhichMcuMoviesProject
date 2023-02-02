@@ -3,40 +3,27 @@ import React, { useState, useEffect } from 'react';
 import WatchOrderCard from '../WatchOrderCard/WatchOrderCard';
 import './WatchOrder.css'
 import { useRef } from 'react'
+import ButtonGroup from '../ButtonGroup/ButtonGroup';
 
 
-/*class movie {
-    constructor(name, url) {
-      this.name = name;
-      this.url = url;
-      
-    }
-  }*/
-
-
- 
-    /*const movie1 = new movie("Doctor Strange in the Multiverse of Madness",'https://m.media-amazon.com/images/I/913v0sAkiyL._AC_UY218_.jpg');
-    const movie2 = new movie("Avengers",'https://m.media-amazon.com/images/I/81lMrc8bBRL._AC_UY218_.jpg');
-    const movie3 = new movie("Captain America: The First Avenger",'https://m.media-amazon.com/images/I/91LmsuoBOIL._AC_UY218_.jpg');
-    const movie4 = new movie("Iron Man",'https://m.media-amazon.com/images/I/91qvAndeVYL._AC_UY218_.jpg');
-    const movie5 = new movie("The Incredible Hulk",'https://m.media-amazon.com/images/I/91wFHajfFpL._AC_UY218_.jpg');
-    const movie6 = new movie("Iron Man 2",'https://m.media-amazon.com/images/I/91SdhGAiBKL._AC_UY218_.jpg');
-    const movie7 = new movie("Captain America : The Winter Soldier",'https://m.media-amazon.com/images/I/91cW92vUDoL._AC_UY218_.jpg');
-    const movie8 = new movie("Thor : The Dark World",'https://m.media-amazon.com/images/I/91RsJltFGLL._AC_UY218_.jpg');
-    const movie9 = new movie("Thor : Ragnarok",'https://m.media-amazon.com/images/I/81l1Kaw8aKL._AC_UY218_.jpg');*/
-    //const fetchedTitles =  [movie1, movie2, movie3, movie4,movie5,movie6,movie7,movie8, movie9];
-    
   
-
+const WatchOrderModes = ["All", "Main Hero's TItles", "Main Hero appearing"];
 
 const WatchOrder = ({chosenTitle}) => {
   let isTargetTitle = false;
+  const [watchOrderMode, setMode] = useState(WatchOrderModes[0]);
   const [fetchedTitles, setfetchedTitles] = useState([]);
-  //console.log("why?");
   const prevChosenTitle = useRef(chosenTitle);
 
+  const changeWatchOrderMode = (mode) => {
+      setMode(WatchOrderModes[mode]);
+  
+      console.log("mode now is:" , mode)
+  }
 
   useEffect(() => {
+    
+
     if(prevChosenTitle.current !== chosenTitle){
       prevChosenTitle.current = chosenTitle;
       fetch(`http://localhost:3001/AllTitlesToSelected?name=${chosenTitle}`)
@@ -58,6 +45,9 @@ const WatchOrder = ({chosenTitle}) => {
   return (
     <div className='WatchOrderStyle    dib bw2'>
      <h1 className='Title'>Watch Order</h1>
+     <div className='ButtonGroupOrderMode'>
+            <ButtonGroup  Modes={WatchOrderModes} ButtonChanged={changeWatchOrderMode}/>
+          </div>
      <div className='WatchOrderCardsContainer' >
          {
            fetchedTitles.map((title, i) => {
