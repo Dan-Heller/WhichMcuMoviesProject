@@ -7,13 +7,14 @@ import ButtonGroup from '../ButtonGroup/ButtonGroup';
 
 
   
-const WatchOrderModes = ["All", "Main Hero's TItles", "Main Hero appearing"];
+const WatchOrderModes = ["All", "Main Hero's Titles", "Main Hero appearing"];
 
 const WatchOrder = ({chosenTitle}) => {
   let isTargetTitle = false;
   const [watchOrderMode, setMode] = useState(WatchOrderModes[0]);
   const [fetchedTitles, setfetchedTitles] = useState([]);
   const prevChosenTitle = useRef(chosenTitle);
+  const prevChosenMode = useRef(watchOrderMode);
 
   const changeWatchOrderMode = (mode) => {
       setMode(WatchOrderModes[mode]);
@@ -24,9 +25,10 @@ const WatchOrder = ({chosenTitle}) => {
   useEffect(() => {
     
 
-    if(prevChosenTitle.current !== chosenTitle){
+    if(prevChosenTitle.current !== chosenTitle || prevChosenMode.current !== watchOrderMode){
       prevChosenTitle.current = chosenTitle;
-      fetch(`http://localhost:3001/AllTitlesToSelected?name=${chosenTitle}`)
+      prevChosenMode.current = watchOrderMode;
+      fetch(`http://localhost:3001/AllTitlesToSelectedByMode?titleind=${chosenTitle}&mode=${watchOrderMode}`)
       .then(res => res.json())
       .then(data => {
        // console.log(data);
