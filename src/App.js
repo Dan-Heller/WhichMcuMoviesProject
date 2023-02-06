@@ -6,7 +6,7 @@ import { Component } from 'react';
 import WatchOrder from './components/WatchOrder/WatchOrder';
 
 
-
+const SearchByModes = ["By Title", "By Character"];
 
 class App extends Component {
 
@@ -14,8 +14,18 @@ class App extends Component {
     super()
     this.state = {
       chosenTitleInd: '',
-      
+      searchByMode: ''
     }
+   
+  }
+
+  ChangeSearchByMode = (value) => {
+    
+    this.setState({ searchByMode: SearchByModes[value] });
+  }
+
+  componentDidMount(){
+    this.setState({ searchByMode: SearchByModes[0]});
   }
 
   TitleClicked = (TitleInd) => {
@@ -32,12 +42,13 @@ class App extends Component {
             <Logo />
             <h1 className='shadow'>GUIDE</h1>
           </header>
-          < ContentBrowse TitleClicked={this.TitleClicked}/>
-          < WatchOrder chosenTitle={this.state.chosenTitleInd} TitleClicked={this.TitleClicked} />
+          < ContentBrowse searchByModes={SearchByModes} TitleClicked={this.TitleClicked} searchByMode={this.state.searchByMode} ChangeSearchByMode={this.ChangeSearchByMode}/>
+          < WatchOrder  chosenInd={this.state.chosenTitleInd} TitleClicked={this.TitleClicked} searchByModes={SearchByModes} searchByMode={this.state.searchByMode}/>
           
         </div>
       );
   }
 }
+
 
 export default App;

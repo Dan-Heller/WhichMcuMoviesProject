@@ -9,12 +9,15 @@ import ButtonGroup from '../ButtonGroup/ButtonGroup';
   
 const WatchOrderModes = ["All", "Main Hero's Titles", "Main Hero appearing"];
 
-const WatchOrder = ({chosenTitle}) => {
+const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
   let isTargetTitle = false;
   const [watchOrderMode, setMode] = useState(WatchOrderModes[0]);
   const [fetchedTitles, setfetchedTitles] = useState([]);
-  const prevChosenTitle = useRef(chosenTitle);
+  const prevChosenTitle = useRef(chosenInd);
   const prevChosenMode = useRef(watchOrderMode);
+  
+
+ 
 
   const changeWatchOrderMode = (mode) => {
       setMode(WatchOrderModes[mode]);
@@ -22,26 +25,56 @@ const WatchOrder = ({chosenTitle}) => {
       console.log("mode now is:" , mode)
   }
 
-  useEffect(() => {
-    
+  const fetchTitles = (chosenTitleInd) => {
+    fetch(`http://localhost:3001/AllTitlesToSelectedByMode?titleind=${chosenTitleInd}&mode=${watchOrderMode}`)
+    .then(res => res.json())
+    .then(data => {
+     // console.log(data);
+      //this.setState({ titles: data });
+      setfetchedTitles(data);
+      
+      console.log(data);
+      
+    })
+    .catch(err => {
+      console.log(err);
+      
+    });
+  }
 
-    if(prevChosenTitle.current !== chosenTitle || prevChosenMode.current !== watchOrderMode){
-      prevChosenTitle.current = chosenTitle;
-      prevChosenMode.current = watchOrderMode;
-      fetch(`http://localhost:3001/AllTitlesToSelectedByMode?titleind=${chosenTitle}&mode=${watchOrderMode}`)
-      .then(res => res.json())
-      .then(data => {
-       // console.log(data);
-        //this.setState({ titles: data });
-        setfetchedTitles(data);
-        console.log(data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  useEffect(() => {
+   
+    if(!chosenInd){
+      return;
+    }
+
+
+
+    let chosenTitleInd = chosenInd; 
+    
+    /*if(prevChosenTitle.current !== chosenInd || prevChosenMode.current !== watchOrderMode){
+      prevChosenTitle.current = chosenInd;
+      prevChosenMode.current = watchOrderMode;*/
+      //get latest movie ind of character
+        
+        if(searchByMode == searchByModes[1] ){  
+          
+          fetch(`http://localhost:3001/GetTitleIndByCharacter?characterId=${chosenTitleInd}`)
+          .then(res => res.json())
+          
+           .then (data => {chosenTitleInd = data[0].ind; fetchTitles(chosenTitleInd);})
+           
+        }
+        else{
+          fetchTitles(chosenTitleInd);
+        }
+       
+      
+
+    
     }
     
-  })
+  )
 
 
   return (
