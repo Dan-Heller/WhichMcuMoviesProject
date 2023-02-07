@@ -43,13 +43,13 @@ const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
   }
 
   useEffect(() => {
-   
+    
+    
+
     if(!chosenInd){
+     
       return;
     }
-
-
-
     let chosenTitleInd = chosenInd; 
     
     /*if(prevChosenTitle.current !== chosenInd || prevChosenMode.current !== watchOrderMode){
@@ -68,13 +68,7 @@ const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
         else{
           fetchTitles(chosenTitleInd);
         }
-       
-      
-
-    
-    }
-    
-  )
+    });
 
 
   return (
