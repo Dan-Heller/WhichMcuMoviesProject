@@ -47,7 +47,7 @@ const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
     
 
     if(!chosenInd){
-     
+      fetchTitles(" "); //fetch all titles to watch order
       return;
     }
     let chosenTitleInd = chosenInd; 
@@ -57,15 +57,27 @@ const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
       prevChosenMode.current = watchOrderMode;*/
       //get latest movie ind of character
         
-        if(searchByMode == searchByModes[1] ){  
+        if(searchByMode == searchByModes[1] ){  // by character
           
-          fetch(`http://localhost:3001/GetTitleIndByCharacter?characterId=${chosenTitleInd}`)
-          .then(res => res.json())
-          
-           .then (data => {chosenTitleInd = data[0].ind; fetchTitles(chosenTitleInd);})
-           
+          if(watchOrderMode === WatchOrderModes[0])//ALL
+          {
+            fetch(`http://localhost:3001/GetTitleIndByCharacter?characterId=${chosenTitleInd}`)
+            .then(res => res.json())
+            .then (data => {chosenTitleInd = data[0].ind; fetchTitles(chosenTitleInd);})
+          }
+          else if(watchOrderMode === WatchOrderModes[1]){
+            fetch(`http://localhost:3001/GetMainTitlesOfCharacter?characterId=${chosenTitleInd}`)
+            .then(res => res.json())
+            .then(data =>{setfetchedTitles(data); })
+          }
+          else{
+            fetch(`http://localhost:3001/GetAppearingTitlesOfCharacter?characterId=${chosenTitleInd}`)
+            .then(res => res.json())
+            .then(data =>{setfetchedTitles(data); })
+          }
         }
         else{
+         
           fetchTitles(chosenTitleInd);
         }
     });
