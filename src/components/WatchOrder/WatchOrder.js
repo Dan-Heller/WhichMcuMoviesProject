@@ -4,10 +4,12 @@ import WatchOrderCard from '../WatchOrderCard/WatchOrderCard';
 import './WatchOrder.css'
 import { useRef } from 'react'
 import ButtonGroup from '../ButtonGroup/ButtonGroup';
-
+import * as TitlesService from '../../Services/TitlesService';
+import * as CharactersService from '../../Services/CharactersService';
 
   
 const WatchOrderModes = ["All", "Main Hero's Titles", "Main Hero appearing"];
+
 
 const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
   let isTargetTitle = false;
@@ -29,12 +31,7 @@ const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
     fetch(`http://localhost:3001/AllTitlesToSelectedByMode?titleind=${chosenTitleInd}&mode=${watchOrderMode}`)
     .then(res => res.json())
     .then(data => {
-     // console.log(data);
-      //this.setState({ titles: data });
       setfetchedTitles(data);
-      
-      console.log(data);
-      
     })
     .catch(err => {
       console.log(err);
@@ -42,46 +39,52 @@ const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
     });
   }
 
-  useEffect(() => {
+  useEffect( () => {
     
-    
-
     if(!chosenInd){
       fetchTitles(" "); //fetch all titles to watch order
       return;
     }
     let chosenTitleInd = chosenInd; 
-    
-    /*if(prevChosenTitle.current !== chosenInd || prevChosenMode.current !== watchOrderMode){
-      prevChosenTitle.current = chosenInd;
-      prevChosenMode.current = watchOrderMode;*/
+
+    const fetchAllTitlesToSelectedByModeFromService = async () => {
+      const data = await TitlesService.fetchAllTitlesToSelectedByMode(chosenTitleInd,watchOrderMode);
+      setfetchedTitles(data);
+    };
+    const fetchAppearingTitlesOfCharacterFromService = async () => {
+      const data = await TitlesService.fetchAppearingTitlesOfCharacter(chosenTitleInd);
+      setfetchedTitles(data);
+    };
+    const fetchMainTitlesOfCharacterFromService = async () => {
+      const data = await TitlesService.fetchMainTitlesOfCharacter(chosenTitleInd);
+      setfetchedTitles(data);
+    };
+    const fetchLatestCharacterTitleFromService = async () => {
+      const data = await TitlesService.GetLatestCharacterTitle(chosenTitleInd);
+      chosenTitleInd = data[0].ind;
+      fetchAllTitlesToSelectedByModeFromService();
+    };
+
       //get latest movie ind of character
-        
+        let data;
         if(searchByMode == searchByModes[1] ){  // by character
           
           if(watchOrderMode === WatchOrderModes[0])//ALL
           {
-            fetch(`http://localhost:3001/GetTitleIndByCharacter?characterId=${chosenTitleInd}`)
-            .then(res => res.json())
-            .then (data => {chosenTitleInd = data[0].ind; fetchTitles(chosenTitleInd);})
+            fetchLatestCharacterTitleFromService();
           }
           else if(watchOrderMode === WatchOrderModes[1]){
-            fetch(`http://localhost:3001/GetMainTitlesOfCharacter?characterId=${chosenTitleInd}`)
-            .then(res => res.json())
-            .then(data =>{setfetchedTitles(data); })
+            fetchMainTitlesOfCharacterFromService();
           }
           else{
-            fetch(`http://localhost:3001/GetAppearingTitlesOfCharacter?characterId=${chosenTitleInd}`)
-            .then(res => res.json())
-            .then(data =>{setfetchedTitles(data); })
+            fetchAppearingTitlesOfCharacterFromService();
           }
         }
         else{
-         
-          fetchTitles(chosenTitleInd);
+         fetchAllTitlesToSelectedByModeFromService();
         }
-    });
-
+    },[watchOrderMode,chosenInd]);
+ 
 
   return (
     <div className='WatchOrderStyle    dib bw2'>
@@ -91,6 +94,7 @@ const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
           </div>
      <div className='WatchOrderCardsContainer' >
          {
+          
            fetchedTitles.map((title, i) => {
             if(i+1 === fetchedTitles.length ) //the last is the taget
             {

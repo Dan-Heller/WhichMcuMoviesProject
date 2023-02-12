@@ -4,6 +4,9 @@ import SearchBox from '../SearchBox/SearchBox';
 import './ContentBrowse.css'
 import Title from '../../Models/Title';
 import TwoButtonGroup from '../TwoButtonGroup/TwoButtonGroup';
+import * as TitlesService from '../../Services/TitlesService';
+import * as CharactersService from '../../Services/CharactersService';
+
 
 
 
@@ -27,16 +30,16 @@ class ContentBrowse extends Component {
    
       if (this.props.searchByModes[value] !== this.props.searchByMode){
           this.props.ChangeSearchByMode(value); //changes mode in app.js
-          let res;
+          let data;
         
           if(this.props.searchByModes[value] == this.props.searchByModes[1]){
       
-            res = await fetch('http://localhost:3001/AllCharacters');
+            data = await CharactersService.fetchAllCharacters();
          }
          else{
-           res = await fetch('http://localhost:3001/AllTitles');
+           data = await TitlesService.fetchAllTitles();
          }
-         const data = await res.json();
+         
          const TitlesArray = data;
          this.setState({ titles: TitlesArray });
 
@@ -47,15 +50,14 @@ class ContentBrowse extends Component {
 
    async componentDidMount() {
   try {
-    let res;
+    let data;
     if(this.props.searchByMode == this.props.searchByModes[1]){
       
-       res = await fetch('http://localhost:3001/AllCharacters');
+       data = await CharactersService.fetchAllCharacters();
     }
     else{
-      res = await fetch('http://localhost:3001/AllTitles');
+      data = await TitlesService.fetchAllTitles();
     }
-    const data = await res.json();
     const TitlesArray = data;
     this.setState({ titles: TitlesArray });
     
