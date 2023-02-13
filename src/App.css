@@ -3,6 +3,13 @@
   
 }
 
+@font-face {
+  font-family: 'AvengersFont';
+  src: url('./Fonts/AvengeroRegular-zvgl.ttf') format('truetype');
+      
+}
+
+
 .LogoContainer{
   padding-top: 50px;
   display: flex;
@@ -30,7 +37,9 @@
 
 h1{
   color: black;
-  margin: 0ch;
+  margin: 5px;
+  font-family: 'AvengersFont';
 }
+
 
 
