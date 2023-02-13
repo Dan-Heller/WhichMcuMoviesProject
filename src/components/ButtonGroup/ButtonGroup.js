@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ButtonGroup.css";
 
 const ButtonGroup = ({Modes, ButtonChanged}) => {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(2);
 
   
   const handleClick = (value) => {

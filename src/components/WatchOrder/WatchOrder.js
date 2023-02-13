@@ -13,7 +13,7 @@ const WatchOrderModes = ["All", "Main Hero's Titles", "Main Hero appearing"];
 
 const WatchOrder = ({chosenInd,searchByMode,searchByModes}) => {
   let isTargetTitle = false;
-  const [watchOrderMode, setMode] = useState(WatchOrderModes[0]);
+  const [watchOrderMode, setMode] = useState(WatchOrderModes[2]);
   const [fetchedTitles, setfetchedTitles] = useState([]);
   const prevChosenTitle = useRef(chosenInd);
   const prevChosenMode = useRef(watchOrderMode);
