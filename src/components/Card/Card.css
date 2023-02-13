@@ -15,3 +15,9 @@ img{
    height : 250px; 
   
 }
+
+.chosenBorder{
+    border: 2px solid ;
+    border-radius: 2%;
+    border-color: whitesmoke;
+}

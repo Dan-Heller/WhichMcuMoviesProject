@@ -90,7 +90,7 @@ class ContentBrowse extends Component {
           
 
           <div id="cardsContainer">
-          <CardList titlesProp={filteredTitles}   ref={this.childRef}  TitleClicked={this.props.TitleClicked} />
+          <CardList titlesProp={filteredTitles}   ref={this.childRef}  TitleClicked={this.props.TitleClicked}  chosenInd={this.props.chosenInd}/>
           </div>
 
           </div>

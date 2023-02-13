@@ -5,8 +5,9 @@ import chevronLeft from './chevronLeft.png';
 import chevronRight from './chevronRight.png';
 
 
-const CardList = ({titlesProp, TitleClicked} ) => {
+const CardList = ({titlesProp, TitleClicked,chosenInd} ) => {
   const cardsContainerRef = React.createRef();
+  let isChosen = false;
   const handleRightClick = (event) => {
     cardsContainerRef.current.scrollTo({
       left: cardsContainerRef.current.scrollLeft + 400,
@@ -32,12 +33,20 @@ const CardList = ({titlesProp, TitleClicked} ) => {
       <div className='cards'  ref={cardsContainerRef}>
       {
         titlesProp.map((title, i) => {
+          if(chosenInd === titlesProp[i].ind){
+            console.log("choosed");
+            isChosen = true;
+          }
+          else{
+            isChosen = false;
+          }
           return(
             <Card
             url={titlesProp[i].poster_url}
             name={titlesProp[i].name} 
             TitleClicked={TitleClicked}
             Index = {titlesProp[i].ind}
+            isChosen={isChosen}
             />
           );
         })

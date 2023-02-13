@@ -42,7 +42,7 @@ class App extends Component {
             <Logo />
             <h1 className='shadow'>GUIDE</h1>
           </header>
-          < ContentBrowse searchByModes={SearchByModes} TitleClicked={this.TitleClicked} searchByMode={this.state.searchByMode} ChangeSearchByMode={this.ChangeSearchByMode}/>
+          < ContentBrowse searchByModes={SearchByModes} TitleClicked={this.TitleClicked} searchByMode={this.state.searchByMode} ChangeSearchByMode={this.ChangeSearchByMode} chosenInd={this.state.chosenTitleInd}/>
           < WatchOrder  chosenInd={this.state.chosenTitleInd} TitleClicked={this.TitleClicked} searchByModes={SearchByModes} searchByMode={this.state.searchByMode}/>
           
         </div>
